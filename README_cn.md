@@ -15,6 +15,11 @@ docker compose up -d
 
 然后浏览器端打开[localhost:8000](http://localhost:8000/zh-CN/)即可访问。
 
+您也可使用docker仅启动数据库，不启动banbot：
+```shell
+docker compose up -d timescaledb
+```
+
 > 容器内已自动配置`BanDataDir`和`BanStratDir`环境变量，您在执行文档相关命令时无需再次配置
 
 ## 下一步？

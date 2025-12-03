@@ -11,6 +11,12 @@ docker compose up -d
 
 Then open [localhost:8000](http://localhost:8000/en-US/) in your browser to access it.
 
+You can also start the database only using Docker, without starting banbot:
+
+```shell
+docker compose up -d timescaledb
+```
+
 > The `BanDataDir` and `BanStratDir` environment variables are already configured within the container, so you do not need to configure them again when executing commands related to the documentation.
 
 ## What’s next?
