@@ -1,8 +1,10 @@
-# startup: `docker compose up -d`
-# check: `docker compose ps` / `docker compose logs -f`
+# Banbot 本地快速运行的 Docker Compose 配置
+# 使用同目录下的 `.env` 文件进行参数化，便于按需快速调整
+# 启动：`docker compose up -d`，状态：`docker compose ps`，日志：`docker compose logs -f`
 
 services:
   timescaledb:
+    # TimescaleDB（PostgreSQL）用于存储行情与交易等数据
     image: ${TIMESCALE_IMAGE}
     container_name: ${TIMESCALE_NAME}
     ports:
@@ -12,21 +14,23 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/pgdata
     volumes:
-      - "${PGDATA_DIR}:/pgdata"
+      - "${PGDATA_DIR}:/pgdata" # 宿主机持久化目录挂载
     healthcheck:
+      # 健康检查：等待数据库就绪，便于依赖服务启动
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d postgres || exit 1"]
       interval: 5s
       timeout: 4s
       retries: 5
       start_period: 10s
-    restart: unless-stopped
+    restart: unless-stopped # 自动重启，除非手动停止
 
   banbot:
+    # Banbot 主服务，提供 Web UI 与策略执行
     image: banbot/banbot:${BANBOT_TAG}
     # platform: linux/amd64  # 如果是arm架构CPU，需取消注释此行，否则会错误：no matching manifest for linux/arm64
     container_name: ${BANBOT_NAME}
     ports:
-      - "${BANBOT_PORT}:8000"
+      - "${BANBOT_PORT}:8000" # 映射 Web UI（容器 8000）到宿主机端口
     command:
       - -host
       - 0.0.0.0
@@ -38,9 +42,9 @@ services:
           binance:
             proxy: ${BANBOT_PROXY}
     volumes:
-      - "${BANBOT_DIR}:/ban/strats"
-      - "${BANBOT_DATA}:/ban/data"
+      - "${BANBOT_STRAT_DIR}:/ban/strats" # 挂载策略代码目录   #对应变量https://docs.banbot.site/zh-CN/guide/quick_local网址的Step 3. 配置环境变量 BanStratDir的值
+      - "${BANBOT_DATA_DIR}:/ban/data"   # 挂载数据输出与缓存目录  #对应变量https://docs.banbot.site/zh-CN/guide/quick_local网址的Step 3. 配置环境变量 BanDataDir的值
     depends_on:
       timescaledb:
-        condition: service_healthy
-    restart: unless-stopped
+        condition: service_healthy # 数据库健康后再启动
+    restart: unless-stopped # 自动重启，除非手动停止
