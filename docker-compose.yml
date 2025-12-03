@@ -27,7 +27,16 @@ services:
     container_name: ${BANBOT_NAME}
     ports:
       - "${BANBOT_PORT}:8000"
-    command: ["-host", "0.0.0.0", "-config-data", "{database: {url: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@timescaledb:5432/ban}}"]
+    command:
+      - -host
+      - 0.0.0.0
+      - -config-data
+      - |
+        database:
+          url: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@timescaledb:5432/ban
+        exchange:
+          binance:
+            proxy: ${BANBOT_PROXY}
     volumes:
       - "${BANBOT_DIR}:/ban/strats"
       - "${BANBOT_DATA}:/ban/data"

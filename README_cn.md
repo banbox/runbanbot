@@ -4,9 +4,15 @@
 使用docker/podman启动banbot：
 ```shell
 git clone https://github.com/banbox/runbanbot.git
+```
+访问币安api需要设置VPN代理，您可进入`runbanbot`中编辑`.env`文件，修改`BANBOT_PROXY`值为您的本地VPN代理，如：`http://127.0.0.1:10808`
+
+然后执行下面命令启动即可：
+```shell
 cd runbanbot
 docker compose up -d
 ```
+
 然后浏览器端打开[localhost:8000](http://localhost:8000/zh-CN/)即可访问。
 
 ## 下一步？
