@@ -15,6 +15,8 @@ docker compose up -d
 
 然后浏览器端打开[localhost:8000](http://localhost:8000/zh-CN/)即可访问。
 
+> 容器内已自动配置`BanDataDir`和`BanStratDir`环境变量，您在执行文档相关命令时无需再次配置
+
 ## 下一步？
 * **回测已有策略**：[文档](https://docs.banbot.site/zh-CN/guide/backtest)
 * **添加新策略**：[文档](https://docs.banbot.site/zh-CN/guide/strat_custom)
@@ -34,4 +36,4 @@ docker compose up -d
 您本地已有postgresql在运行，您可修改`.env`中的`PG_PORT`为其他端口，如`5433`，然后重新启动即可
 
 #### no matching manifest for linux/arm64/v8 in the manifest list entries
-您电脑CPU架构是arm，需要修改`docker-compose.yml`对第26行取消注释，指定`platform: linux/amd64`
+您电脑CPU架构是arm，需要修改`docker-compose.yml`对第30行取消注释，指定`platform: linux/amd64`

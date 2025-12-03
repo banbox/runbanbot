@@ -11,6 +11,8 @@ docker compose up -d
 
 Then open [localhost:8000](http://localhost:8000/en-US/) in your browser to access it.
 
+> The `BanDataDir` and `BanStratDir` environment variables are already configured within the container, so you do not need to configure them again when executing commands related to the documentation.
+
 ## What’s next?
 
 * **Backtest existing strategies**: [Documentation](https://docs.banbot.site/en-US/guide/backtest)
@@ -36,4 +38,4 @@ PostgreSQL is already running on your machine. You can change `PG_PORT` in `.env
 
 #### no matching manifest for linux/arm64/v8 in the manifest list entries
 
-Your computer's CPU architecture is ARM. You need to modify `docker-compose.yml` and uncomment line 26, specifying `platform: linux/amd64`.
+Your computer's CPU architecture is ARM. You need to modify `docker-compose.yml` and uncomment line 30, specifying `platform: linux/amd64`.
