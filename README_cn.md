@@ -5,7 +5,10 @@
 ```shell
 git clone https://github.com/banbox/runbanbot.git
 ```
-访问币安api需要设置VPN代理，您可进入`runbanbot`中编辑`.env`文件，修改`BANBOT_PROXY`值为您的本地VPN代理，如：`http://127.0.0.1:10808`
+访问币安api需要设置VPN代理，您可进入`runbanbot`中编辑`.env`文件，修改`BANBOT_PROXY`值为您的本地VPN代理，如：`http://host.docker.internal:7890`
+
+> 上面的`host.docker.internal`即在docker容器内访问宿主机的地址，您也可执行`ipconfig`查看局域网ip替换。  
+> 注意，您还需要在VPN代理软件中设置允许来自局域网的连接。
 
 然后执行下面命令启动即可：
 ```shell

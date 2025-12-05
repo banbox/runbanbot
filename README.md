@@ -11,6 +11,11 @@ docker compose up -d
 
 Then open [localhost:8000](http://localhost:8000/en-US/) in your browser to access it.
 
+If your network environment cannot access the Binance API directly, you will need to set a VPN proxy. You can open the `runbanbot` directory and edit the `.env` file, then change the value of `BANBOT_PROXY` to your local VPN proxy, for example: `http://host.docker.internal:7890`.
+
+> The `host.docker.internal` above is the address used by a Docker container to access the host machine. You may also run `ipconfig` to check your LAN IP and replace it.  
+> Note that you also need to enable “allow connections from the LAN” (or similar) in your VPN/proxy software.
+
 You can also start the database only using Docker, without starting banbot:
 
 ```shell
