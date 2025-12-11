@@ -26,12 +26,22 @@ docker compose up -d timescaledb
 > 容器内已自动配置`BanDataDir`和`BanStratDir`环境变量，您在执行文档相关命令时无需再次配置
 
 ## 下一步？
+
+[banbot入门到进阶](https://www.bilibili.com/video/BV1b72CBXEQu/)
+
 * **回测已有策略**：[文档](https://docs.banbot.site/zh-CN/guide/backtest)
 * **添加新策略**：[文档](https://docs.banbot.site/zh-CN/guide/strat_custom)
 * **实时运行**：[文档](https://docs.banbot.site/zh-CN/guide/live_trading)
 * **高级自定义**：如果您想进行更高级研究，如使用banbot获取一些品种同一时段K线，计算其相关性等，您可下载[banbot](https://github.com/banbox/banbot)源代码，在AI IDE中打开，附加[doc/help.md](https://docs.banbot.site/zh-CN/guide/live_trading)作为知识库，让AI帮你完成所需代码
 
 ## 常见问题
+
+#### 如何升级banbot?
+```shell
+docker compose pull banbot
+docker compose up -d banbot
+```
+
 #### Command 'docker' not found, but can be installed with
 您本地未安装docker，您可选择安装docker或podman其一
 * [docker](https://docs.docker.com/desktop/)

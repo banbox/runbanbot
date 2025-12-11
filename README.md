@@ -26,12 +26,20 @@ docker compose up -d timescaledb
 
 ## What’s next?
 
+[Banbot: From Beginner to Advanced](https://www.bilibili.com/video/BV1b72CBXEQu/)
+
 * **Backtest existing strategies**: [Documentation](https://docs.banbot.site/en-US/guide/backtest)
 * **Add new strategies**: [Documentation](https://docs.banbot.site/en-US/guide/strat_custom)
 * **Live trading**: [Documentation](https://docs.banbot.site/en-US/guide/live_trading)
 * **Advanced customization**: If you want to perform more advanced research, such as using banbot to obtain K-lines of multiple assets during the same period and calculate their correlation, you can download the [banbot](https://github.com/banbox/banbot) source code, open it in an AI IDE, attach [doc/help.md](https://docs.banbot.site/en-US/guide/live_trading) as a knowledge base, and let AI help you write the required code.
 
 ## FAQ
+
+#### how to upgrade banbot?
+```shell
+docker compose pull banbot
+docker compose up -d banbot
+```
 
 #### Command 'docker' not found, but can be installed with
 
