@@ -16,13 +16,8 @@ If your network environment cannot access the Binance API directly, you will nee
 > The `host.docker.internal` above is the address used by a Docker container to access the host machine. You may also run `ipconfig` to check your LAN IP and replace it.  
 > Note that you also need to enable “allow connections from the LAN” (or similar) in your VPN/proxy software.
 
-You can also start the database only using Docker, without starting banbot:
-
-```shell
-docker compose up -d timescaledb
-```
-
 > The `BanDataDir` and `BanStratDir` environment variables are already configured within the container, so you do not need to configure them again when executing commands related to the documentation.
+> The database uses the built-in QuestDB, no need to start a separate database service.
 
 ## What’s next?
 
@@ -50,10 +45,6 @@ Docker is not installed on your machine. You may install either docker or podman
 
 > After installing podman, you need to [configure registries.conf](https://podman.io/docs/installation#registriesconf) to use Docker Hub by default; otherwise, image pulling will fail.
 > Docker installation includes `docker compose`; if you use podman, you need to install `docker-compose-v2` separately. You may ask AI: How to use docker compose based on podman socket?
-
-#### cannot listen on the TCP port: listen tcp4 :5432: bind: address already in use
-
-PostgreSQL is already running on your machine. You can change `PG_PORT` in `.env` to another port, such as `5433`, then restart.
 
 #### no matching manifest for linux/arm64/v8 in the manifest list entries
 

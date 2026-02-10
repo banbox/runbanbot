@@ -18,12 +18,8 @@ docker compose up -d
 
 然后浏览器端打开[localhost:8000](http://localhost:8000/zh-CN/)即可访问。
 
-您也可使用docker仅启动数据库，不启动banbot：
-```shell
-docker compose up -d timescaledb
-```
-
 > 容器内已自动配置`BanDataDir`和`BanStratDir`环境变量，您在执行文档相关命令时无需再次配置
+> 数据库使用内置的 QuestDB，无需额外启动数据库服务
 
 ## 下一步？
 
@@ -49,9 +45,6 @@ docker compose up -d banbot
 
 > podman安装完成后，您需要[配置registries.conf](https://podman.io/docs/installation#registriesconf)默认使用docker hub镜像，否则拉取镜像时会失败  
 > docker安装自带`docker compose`；如果使用poaman，您需要额外安装`docker-compose-v2`，可问AI：如何基于podman socket使用docker compose？
-
-#### cannot listen on the TCP port: listen tcp4 :5432: bind: address already in use
-您本地已有postgresql在运行，您可修改`.env`中的`PG_PORT`为其他端口，如`5433`，然后重新启动即可
 
 #### no matching manifest for linux/arm64/v8 in the manifest list entries
 您电脑CPU架构是arm，需要修改`docker-compose.yml`对第30行取消注释，指定`platform: linux/amd64`
