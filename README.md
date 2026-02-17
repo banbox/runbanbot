@@ -2,24 +2,26 @@
 [中文](./README_cn.md)
 
 Use docker/podman to start banbot:
-
 ```shell
 git clone https://github.com/banbox/runbanbot.git
+```
+To access the Binance API, you need to set a VPN proxy. You can enter the `runbanbot` directory and edit the `.env` file, changing the value of `BANBOT_PROXY` to your local VPN proxy, for example: `http://host.docker.internal:7897`
+
+> The `host.docker.internal` above is the address used by a Docker container to access the host machine. You may also run `ipconfig` to check your LAN IP and replace it.  
+> Note that you also need to enable "allow connections from the LAN" (or similar) in your VPN/proxy software.
+
+Then execute the following command to start:
+```shell
 cd runbanbot
 docker compose up -d
 ```
 
 Then open [localhost:8000](http://localhost:8000/en-US/) in your browser to access it.
 
-If your network environment cannot access the Binance API directly, you will need to set a VPN proxy. You can open the `runbanbot` directory and edit the `.env` file, then change the value of `BANBOT_PROXY` to your local VPN proxy, for example: `http://host.docker.internal:7897`.
-
-> The `host.docker.internal` above is the address used by a Docker container to access the host machine. You may also run `ipconfig` to check your LAN IP and replace it.  
-> Note that you also need to enable “allow connections from the LAN” (or similar) in your VPN/proxy software.
-
 > The `BanDataDir` and `BanStratDir` environment variables are already configured within the container, so you do not need to configure them again when executing commands related to the documentation.
 > The database uses the built-in QuestDB, no need to start a separate database service.
 
-## What’s next?
+## What's next?
 
 [Banbot: From Beginner to Advanced](https://www.bilibili.com/video/BV1b72CBXEQu/)
 
@@ -30,9 +32,19 @@ If your network environment cannot access the Binance API directly, you will nee
 
 ## FAQ
 
-#### how to upgrade banbot?
+#### How to upgrade banbot?
+**Method 1: Upgrade by updating `strats` code:**
 ```shell
-docker compose pull banbot
+git pull origin main
+go mod tidy
+go build -o bot
+docker compose up -d banbot
+```
+**Method 2: Upgrade by updating `go.mod`:**
+```shell
+go get -u github.com/banbox/banbot
+go mod tidy
+go build -o bot
 docker compose up -d banbot
 ```
 

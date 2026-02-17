@@ -33,8 +33,18 @@ docker compose up -d
 ## 常见问题
 
 #### 如何升级banbot?
+**法一：更新`strats`代码升级：**
 ```shell
-docker compose pull banbot
+git pull origin main
+go mod tidy
+go build -o bot
+docker compose up -d banbot
+```
+**法二：更新`go.mod`升级：**
+```shell
+go get -u github.com/banbox/banbot
+go mod tidy
+go build -o bot
 docker compose up -d banbot
 ```
 
